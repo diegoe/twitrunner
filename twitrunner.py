@@ -38,11 +38,11 @@ with codecs.open("users.txt", "r", "utf-8") as f:
     users = f.readlines()
 
 for teacher in users:
-    name, userid, university, topics = teacher.split("\t")
+    name, university, topics, userid = teacher.strip().split("\t")
 
     try:
         p = api.get_user(userid)
         print "%s\t%s\t%s\t%s\thttps://twitter.com/%s" % \
-            (name, university, topics.strip(), p.followers_count, userid)
+            (name, university, topics, p.followers_count, userid)
     except:
         print "@id is not a valid twitter ID"
